@@ -1,0 +1,120 @@
+body {
+    cursor : url('../assets/Sanrio Cinnamoroll White Arrow & Head--cursor--SweezyCursors.png'), auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+body{
+    background-image: url('../assets/backgroundx.jpg');   
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+
+
+#noButton {
+    cursor : url('../assets/Sanrio Cinnamoroll White Arrow & Head--cursor--SweezyCursors.png'), auto;
+    position: absolute;
+    margin-left: 150px;
+    transition: 0.5s;
+    border: 2px solid #ffffff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+}
+
+#yesButton {
+    cursor : url('../assets/Sanrio Cinnamoroll White Arrow & Head--cursor--SweezyCursors.png'), auto;
+    position: absolute;
+    margin-right: 150px;
+    border: 2px solid #ffffff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+.header_text {
+    font-family: 'Nunito';
+    font-size: 70px;
+    font-weight: bold;
+    color: #CBE6EF;
+    text-shadow: 0 0 2px black;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 55px;
+    margin-left: 20px;
+    
+}
+
+.btn {
+    cursor : url('../assets/Sanrio Cinnamoroll White Arrow & Head--cursor--SweezyCursors.png'), auto;
+    background-color: #80c3d8;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    cursor : url('../assets/Sanrio Cinnamoroll White Arrow & Head--cursor--SweezyCursors.png'), auto;
+    background-color: #FAF9F6;
+}
+
+.gif_container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; 
+    margin-left: 20px; 
+}
+
+.top-controls{
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    transform: none;
+    z-index: 1000;
+}
+
+
+#playMusicButton{
+    cursor : url('../assets/Sanrio Cinnamoroll White Arrow & Head--cursor--SweezyCursors.png'), auto;
+    border: 2px solid #ffffff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+#jumpscare-overlay{position:fixed;inset:0;display:none;justify-content:center;align-items:center;background:rgba(0,0,0,.98);z-index:9999}
+#jumpscare-overlay img{max-width:100%;max-height:100%;animation:jumpscare-zoom .25s ease-in-out}
+#skip-jumpscare{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.1);color:#fff;border:none;font-size:28px;padding:6px 10px;border-radius:6px;cursor:pointer}
+@keyframes jumpscare-zoom{0%{transform:scale(.6) rotate(-5deg);filter:brightness(.6)}60%{transform:scale(1.05) rotate(3deg);filter:brightness(1.05)}100%{transform:none;filter:brightness(1)}}
+
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.image-gallery img {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}

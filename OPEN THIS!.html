@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="./Styles/styles.css">
+    <link rel="stylesheet" href="./Styles/gallery.css">
+    <title>Will you be my valentine?</title>
+    <style>
+        body {
+            cursor : url('./assets/Sanrio Cinnamoroll White Arrow & Head--cursor--SweezyCursors.png'), auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('./assets/backgroundx.jpg');   
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .header_text {
+            font-family: 'Nunito';
+            font-size: 40px;
+            font-weight: bold;
+            color: #CBE6EF;
+            text-shadow: 0 0 4px black, 0 0 2px #000;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 0px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 55px;
+            margin-left: 20px;
+        }
+
+        .btn {
+            cursor : url('./assets/Sanrio Cinnamoroll White Arrow & Head--cursor--SweezyCursors.png'), auto;
+            background-color: #80c3d8;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            cursor : url('./assets/Sanrio Cinnamoroll White Arrow & Head--cursor--SweezyCursors.png'), auto;
+            background-color: #FAF9F6;
+        }
+
+        .gif_container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; 
+            margin-left: 20px; 
+        }
+
+        .top-controls{
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            transform: none;
+            z-index: 1000;
+        }
+
+        #playMusicButton{
+            cursor : url('./assets/Sanrio Cinnamoroll White Arrow & Head--cursor--SweezyCursors.png'), auto;
+            border: 2px solid #ffffff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        body.valentine-theme {
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6C1 50%, #FF69B4 100%) !important;
+            background-image: none !important;
+        }
+
+        .valentine-theme .btn {
+            background: linear-gradient(45deg, #FF69B4, #FF1493) !important;
+            border: 3px solid white !important;
+            border-radius: 50px !important;
+            font-weight: bold !important;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4) !important;
+        }
+
+        .valentine-theme .btn:hover {
+            background: linear-gradient(45deg, #FF1493, #DC143C) !important;
+            transform: scale(1.05) !important;
+        }
+
+        .valentine-theme .header_text {
+            color: #DC143C !important;
+            text-shadow: 0 0 2px white !important;
+        }
+
+        .valentine-container {
+            max-width: 800px;
+            padding: 40px;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .heart-decoration {
+            font-size: 60px;
+            color: #DC143C;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .love-letter {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.3);
+            border: 3px solid #FF69B4;
+            margin: 20px 0;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .love-letter h1 {
+            font-family: 'Nunito', cursive;
+            font-size: 42px;
+            color: #DC143C;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .love-letter p {
+            font-family: 'Nunito', cursive;
+            font-size: 22px;
+            color: #8B4557;
+            line-height: 1.8;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        .signature {
+            font-family: 'Nunito', cursive;
+            font-size: 24px;
+            color: #FF69B4;
+            text-align: right;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        .hearts-floating {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 105, 180, 0.4);
+            font-size: 30px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+            50% { transform: translateY(-20px) rotate(10deg); opacity: 0.8; }
+        }
+
+        .image-gallery {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3px;
+            margin: 20px 0;
+            overflow-x: hidden;
+        }
+
+        .image-gallery img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .image-gallery img:nth-child(3) {
+            max-width: 120px;
+            max-height: 120px;
+            margin: 0 5px;
+        }
+
+        body.yes-page {
+            background-color: #CBE6EF;
+        }
+
+        .yes-page .header_text {
+            color: #CBE6EF;
+        }
+
+        .number-labels-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .number-btn-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 5px 0;
+        }
+
+        .number-btn {
+            min-width: 50px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .number-label {
+            font-family: 'Nunito';
+            font-size: 24px;
+            color: #CBE6EF;
+            text-shadow: 0 0 4px black, 0 0 2px #000;
+        }
+
+        .fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.8); }
+        }
+
+        @keyframes fadeInImage {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .hidden-image {
+            display: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInImage 0.6s ease-out;
+        }
+
+        #hidden-img-1 {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        #hidden-img-2 {
+            max-width: 150px;
+            max-height: 150px;
+        }
+
+        #hidden-img-3 {
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+        #hidden-img-4 {
+            max-width: 300px;
+            max-height: 300px;
+        }
+
+        #hidden-img-5 {
+            max-width: 400px;
+            max-height: 400px;
+        }
+
+        .image-reveal-container {
+            min-height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #jumpscare-overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,.98);
+            z-index: 9999;
+        }
+
+        #jumpscare-overlay img {
+            max-width: 100%;
+            max-height: 100%;
+            animation: jumpscare-zoom .25s ease-in-out;
+        }
+
+        #skip-jumpscare {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255,255,255,.1);
+            color: #fff;
+            border: none;
+            font-size: 28px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        @keyframes jumpscare-zoom {
+            0% { transform: scale(.6) rotate(-5deg); filter: brightness(.6); }
+            60% { transform: scale(1.05) rotate(3deg); filter: brightness(1.05); }
+            100% { transform: none; filter: brightness(1); }
+        }
+
+        .made-with-love {
+            position: fixed;
+            bottom: 10px; 
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-controls">
+        <button class="btn" id="playMusicButton">Play Music</button>
+    </div>
+
+    <div class="page-section active" id="page-1">
+        <div class="container">
+            <div>
+                <h1 class="header_text">Will you be my valentine? TEE HEE </h1>
+            </div>
+            <div class="gif_container">
+                <img src="https://64.media.tumblr.com/44437aaa3af65ef5b5dc25b2cf1e81d1/6acc7d78ea83e207-45/s400x600/5b30035952803850ed3136fbe760ceff97ee8d19.gif" alt="Cute animated illustration">
+            </div>
+            <div class="buttons">
+                <button class="btn" id="yesButton" onclick="goToPage(10)">Yes</button>
+                <button class="btn" id="noButton" onclick="jumpscare()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-section" id="page-2">
+        <div class="container">
+            <div>
+                <h1 class="header_text">Here's a gift for you</h1>
+                <br><br><br><br>
+            </div>
+            <div class="gif_container">
+                <img src="https://media.tenor.com/aPFYmCN1OqsAAAAi/wrapped-gifts-birthday-presents.gif" alt="celebrate" style="margin-top:-60px;">
+            </div>
+            <br><br>
+            <h1 class="header_text">A flower :3 </h1>
+            <br><br>
+            <div class="buttons">
+                <button class="btn" onclick="goToPage(3)">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-section" id="page-3">
+        <div class="container">
+            <div>
+                <h1 class="header_text">A birthday cake too!</h1>
+                <br><br><br><br>
+            </div>
+            <div class="gif_container">
+                <img src="https://gifdb.com/images/high/cute-happy-birthday-sticker-wink-with-cake-nzv7n1fw5n4g6ngc.webp" alt="celebrate" style="margin-top:-60px;">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button class="btn" onclick="goToPage(4)">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-section" id="page-4">
+        <div class="container">
+            <div>
+                <h1 class="header_text">Here's chihuahuas as well</h1>
+                <br><br><br><br>
+            </div>
+            <div class="gif_container">
+                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTJzaHl0YTA4ZzZoM21wZHk0MG9lZmFwb3I2cnN4cGdueWw5cTk4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/342vyKVawCDKCYcpXb/giphy.gif" alt="chihuahua" style="margin-top:-30px;">
+            </div>
+            <br><br>
+            <div class="image-gallery">
+                <img src="./assets/1.jpg" alt="Image 1" style="margin-bottom: -10px;">
+                <img src="./assets/2.jpg" alt="Image 2" style="margin-bottom: -10px;">
+                <img src="./assets/3.jpg" alt="Image 3" style="margin-bottom: -10px;">
+                <img src="./assets/4.jpg" alt="Image 4" style="margin-bottom: -10px;">
+                <img src="./assets/5.jpg" alt="Image 5" style="margin-bottom: -10px;">
+                <img src="./assets/6.jpeg" alt="Image 6" style="margin-bottom: -10px;">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button class="btn" onclick="goToPage(5)">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-section" id="page-5">
+        <div class="container">
+            <div>
+                <h1 class="header_text">And Hachiware/Wigglytuff</h1>
+                <br><br><br><br>
+            </div>
+            <div class="gif_container">
+                <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3gwZXZuY3dzbjllZmR2dTR5MjV5Mno0dW1jemxuZHV0Y2d3djUzaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OqKrj1ARvDxne2oqFT/giphy.gif" alt="celebrate" style="margin-top:-60px;">
+            </div>
+            <br><br>
+            <div class="image-gallery">
+                <img src="./assets/yes/1.png" alt="Image 1" style="margin-bottom: -10px;">
+                <img src="./assets/yes/2.png" alt="Image 2" style="margin-bottom: -10px;">
+                <img src="./assets/yes/3.png" alt="Image 3" style="margin-bottom: -10px;">
+                <img src="./assets/yes/4.png" alt="Image 4" style="margin-bottom: -10px;">
+                <img src="./assets/yes/5.png" alt="Image 5" style="margin-bottom: -10px;">
+                <img src="./assets/yes/6.jpg" alt="Image 6" style="margin-bottom: -10px;">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button class="btn" onclick="goToPage(6)">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-section" id="page-6">
+        <div class="container">
+            <div>
+                <h1 class="header_text">Andddd EGG DOGGIES!!!</h1>
+                <br><br><br><br>
+            </div>
+            <div class="gif_container">
+                <img src="https://media.tenor.com/k7K-XXzu_NMAAAAM/puppy.gif" alt="celebrate" style="margin-top:-60px;">
+            </div>
+            <br><br>
+            <div class="image-gallery">
+                <img src="./assets/yes1/1.jpg" alt="Image 1" style="margin-bottom: -10px;">
+                <img src="./assets/yes1/2.jpg" alt="Image 2" style="margin-bottom: -10px;">
+                <img src="./assets/yes1/3.jpg" alt="Image 3" style="margin-bottom: -10px;">
+                <img src="./assets/yes1/4.jpg" alt="Image 4" style="margin-bottom: -10px;">
+                <img src="./assets/yes1/5.jpg" alt="Image 5" style="margin-bottom: -10px;">
+                <img src="./assets/yes1/6.jpg" alt="Image 6" style="margin-bottom: -10px;">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button class="btn" onclick="goToPage(7)">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-section" id="page-7">
+        <div class="container">
+            <div>
+                <h1 class="header_text">For you!</h1>
+                <br><br><br><br>
+            </div>
+            <div class="gif_container">
+<img src="./assets/yes2/yes.png" alt="For you" style="max-width: 600px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button class="btn" onclick="goToPage(8)">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-section" id="page-8">
+        <div class="hearts-floating">
+            <div class="heart" style="left: 10%; animation-delay: 0s;">♥</div>
+            <div class="heart" style="left: 25%; animation-delay: 1s;">♥</div>
+            <div class="heart" style="left: 40%; animation-delay: 2s;">♥</div>
+            <div class="heart" style="left: 55%; animation-delay: 0.5s;">♥</div>
+            <div class="heart" style="left: 70%; animation-delay: 1.5s;">♥</div>
+            <div class="heart" style="left: 85%; animation-delay: 2.5s;">♥</div>
+        </div>
+        <div class="valentine-container">
+            <div class="heart-decoration">♥ ♥ ♥</div>
+            <div class="love-letter">
+                <h1>Ana</h1>
+                <p>Every day with you is the best day of my life. You make me smile, make me laugh, and you make my heart full, and happy. You’re the light of my life.</p>
+                <p class="signature">yours truly,<br>Your Valentine ♥</p>
+            </div>
+            <div class="gif_container">
+                <img src="./assets/d245527fccbba9ba7e829cdd62ffffa9.png" alt="love" style="margin-top: 10px; max-width: 300px; border-radius: 15px; box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);">
+            </div>
+            <div class="buttons">
+                <button class="btn" onclick="goToPage(9)">Next ♥</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-section" id="page-9">
+        <div class="hearts-floating">
+            <div class="heart" style="left: 10%; animation-delay: 0s;">♥</div>
+            <div class="heart" style="left: 25%; animation-delay: 1s;">♥</div>
+            <div class="heart" style="left: 40%; animation-delay: 2s;">♥</div>
+            <div class="heart" style="left: 55%; animation-delay: 0.5s;">♥</div>
+            <div class="heart" style="left: 70%; animation-delay: 1.5s;">♥</div>
+            <div class="heart" style="left: 85%; animation-delay: 2.5s;">♥</div>
+        </div>
+        <div class="valentine-container">
+            <div class="heart-decoration">♥ ♥ ♥</div>
+            <div class="love-letter">
+                <h1>Thank You, Ana!!!</h1>
+                <p>I'm very happy to have you :)</p>
+            </div>
+            <div class="gif_container">
+                <img src="./assets/image0.gif" alt="celebrate" style="margin-top: 10px; max-width: 300px; border-radius: 15px; box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);">
+            </div>
+        </div>
+    </div>
+
+    <div class="page-section" id="page-10">
+        <div class="container">
+            <div>
+                <h1 class="header_text">Hoorayy!!! Happy Birthday too!!!</h1>
+            </div>
+            <div class="gif_container">
+                <img src="https://i.gifer.com/Pak.gif" alt="Cute animated illustration" style="margin-top: -60px;">
+            </div>
+            <p class="header_text" style="font-size: 50px;">Ana!!!</p>
+            <div class="buttons">
+                <button class="btn" onclick="goToPage(2)">Click for more surprise</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="jumpscare-overlay">
+        <button id="skip-jumpscare" onclick="hideJumpscare()">×</button>
+        <img id="jumpscare-img" src="./assets/tenor.gif" alt="" height="900" width="1600" onerror="this.style.display='none'" />
+    </div>
+    
+    <audio id="jumpscare-sound" src="./assets/ytmp3free.cc_scary-screamer-sound-effect-free-youtubemp3free.org.mp3" preload="auto"></audio>
+    <audio id="bg-music" src="./assets/a.mp3" loop preload="auto" playsinline autoplay style="display:none;"></audio>
+
+    <script>
+        let currentPage = 1;
+        
+        function goToPage(pageNum) {
+            document.getElementById('page-' + currentPage).classList.remove('active');
+            
+            document.getElementById('page-' + pageNum).classList.add('active');
+            currentPage = pageNum;
+            
+            if (pageNum === 8 || pageNum === 9) {
+                document.body.classList.add('valentine-theme');
+            } else {
+                document.body.classList.remove('valentine-theme');
+            }
+            
+            if (pageNum === 9) {
+                document.body.classList.add('yes-page');
+            } else {
+                document.body.classList.remove('yes-page');
+            }
+        }
+        
+        function jumpscare(on=true) {
+            const o = document.getElementById('jumpscare-overlay');
+            const a = document.getElementById('jumpscare-sound');
+            if (!o) return;
+            
+            o.style.display = on ? 'flex' : 'none';
+            o.setAttribute('aria-hidden', !on);
+            
+            try {
+                if (on) {
+                    a.currentTime = 0;
+                    a.play();
+                } else {
+                    a.pause();
+                    a.currentTime = 0;
+                }
+            } catch(e) {}
+        }
+        
+        function hideJumpscare() {
+            jumpscare(false);
+        }
+        
+        function revealImage(num) {
+            const numberButtons = document.getElementById('numberButtons');
+            const numberContainer = document.getElementById('numberContainer');
+            
+            if (numberButtons) {
+                numberButtons.classList.add('fade-out');
+            }
+            
+            for (let i = 1; i <= 5; i++) {
+                const img = document.getElementById('hidden-img-' + i);
+                if (img) {
+                    img.style.display = 'none';
+                }
+            }
+            
+            setTimeout(() => {
+                const selectedImg = document.getElementById('hidden-img-' + num);
+                if (selectedImg) {
+                    selectedImg.style.display = 'block';
+                }
+                
+                if (numberButtons) {
+                    numberButtons.style.display = 'none';
+                }
+            }, 300);
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const bg = document.getElementById('bg-music');
+            const btn = document.getElementById('playMusicButton');
+            
+            if (bg && btn) {
+                bg.volume = 0.7;
+                
+                const tryAutoplay = () => {
+                    bg.play().then(() => {
+                        btn.textContent = 'Stop Music';
+                    }).catch(() => {
+                        btn.textContent = 'Play Music';
+                    });
+                };
+                
+                tryAutoplay();
+                
+                const firstInteraction = () => {
+                    if (bg.paused) {
+                        bg.play().then(() => {
+                            btn.textContent = 'Stop Music';
+                        }).catch(() => {});
+                    }
+                    document.removeEventListener('click', firstInteraction);
+                    document.removeEventListener('keydown', firstInteraction);
+                };
+                document.addEventListener('click', firstInteraction);
+                document.addEventListener('keydown', firstInteraction);
+                
+                const upd = () => {
+                    btn.textContent = bg.paused ? 'Play Music' : 'Stop Music';
+                };
+                
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (bg.paused) {
+                        bg.play().then(() => {
+                            btn.textContent = 'Stop Music';
+                        }).catch((err) => {
+                            console.log('Play error:', err);
+                            alert('Click the audio player controls at the bottom to play music!');
+                        });
+                    } else {
+                        bg.pause();
+                        btn.textContent = 'Play Music';
+                    }
+                });
+                
+                bg.addEventListener('play', upd);
+                bg.addEventListener('pause', upd);
+                upd();
+            }
+        });
+    </script>
+</body>
+</html>
